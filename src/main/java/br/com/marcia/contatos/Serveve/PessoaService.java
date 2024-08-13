@@ -1,5 +1,6 @@
 package br.com.marcia.contatos.Serveve;
 
+import br.com.marcia.contatos.dto.MalaDiretaRecord;
 import br.com.marcia.contatos.dto.PessoaDto;
 import br.com.marcia.contatos.exception.PessoaNaoEncontradaException;
 import br.com.marcia.contatos.model.Pessoa;
@@ -69,4 +70,13 @@ public class PessoaService {
         pessoaRepository.deleteById(id);
     }
 
+    public MalaDiretaRecord findMalaDiretaByPessoaId(Long pessoaId) {
+        Pessoa pessoaModel = pessoaRepository.findById(pessoaId)
+                .orElseThrow(() -> new PessoaNaoEncontradaException("Pessoa não encontrada"));
+
+        String malaDireta = String.format("%s - CEP: %s - %s/%s", pessoaModel.getEndereco(), pessoaModel.getCep(),
+                pessoaModel.getCidade(), pessoaModel.getUf());
+
+        return new MalaDiretaRecord(pessoaModel.getId(), pessoaModel.getNome(), malaDireta);
+    }
 }
