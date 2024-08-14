@@ -1,4 +1,4 @@
-package br.com.marcia.contatos.Serveve;
+package br.com.marcia.contatos.service;
 
 import br.com.marcia.contatos.dto.ContatoDto;
 import br.com.marcia.contatos.exception.ContatoNaoEncontradoException;
@@ -58,7 +58,10 @@ public class ContatoService {
     }
 
     public List<ContatoDto> findContatosByPessoaId(Long pessoaId){
-        return contatoRepository.findAllByPessoaId(pessoaId).stream().map(contatoModel -> {
+       Pessoa pessoaModel = pessoaRepository.findById(pessoaId).orElseThrow(() -> new PessoaNaoEncontradaException("Pessoa Não Encontrada"));
+
+       return pessoaModel.getContatos().stream()
+                .map(contatoModel -> {
             ContatoDto contatoDto = new ContatoDto();
             contatoDto.setId(contatoModel.getId());
             contatoDto.setTipoContato(contatoModel.getTipoContato());

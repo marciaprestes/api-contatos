@@ -1,4 +1,4 @@
-package br.com.marcia.contatos.Serveve;
+package br.com.marcia.contatos.service;
 
 import br.com.marcia.contatos.dto.MalaDiretaRecord;
 import br.com.marcia.contatos.dto.PessoaDto;

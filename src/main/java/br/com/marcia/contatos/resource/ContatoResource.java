@@ -1,8 +1,9 @@
 package br.com.marcia.contatos.resource;
 
-import br.com.marcia.contatos.Serveve.ContatoService;
+import br.com.marcia.contatos.service.ContatoService;
 import br.com.marcia.contatos.dto.ContatoDto;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,7 +20,7 @@ public class ContatoResource {
 
     @Operation(summary = "Cria um contato")
     @PostMapping
-    public ResponseEntity<ContatoDto> save(@RequestBody ContatoDto contatoDto){
+    public ResponseEntity<ContatoDto> save(@RequestBody @Valid ContatoDto contatoDto){
         return ResponseEntity.ok(contatoService.save(contatoDto));
     }
 
@@ -31,7 +32,7 @@ public class ContatoResource {
 
     @Operation(summary = "Atualiza um contato pelo Id")
     @PutMapping("/{id}")
-    public ResponseEntity<ContatoDto> update(@RequestBody ContatoDto contatoDto,@PathVariable Long id){
+    public ResponseEntity<ContatoDto> update(@RequestBody @Valid ContatoDto contatoDto,@PathVariable Long id){
         return ResponseEntity.ok(contatoService.update(contatoDto,id));
     }
 

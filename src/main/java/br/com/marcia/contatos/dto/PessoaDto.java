@@ -1,12 +1,24 @@
 package br.com.marcia.contatos.dto;
 
+import org.hibernate.validator.constraints.Length;
+
 public class PessoaDto {
 
     private Long id;
+
+    @Length(min = 3, max = 100, message = "O nome deve ter no mínimo 3 e no máximo 100 caracteres")
     private String nome;
+
+    @Length(min = 3, max = 100, message = "O endereco deve ter no mínimo 3 e no máximo 100 caracteres")
     private String endereco;
+
+    @Length(min = 9, max = 9, message = "O CEP deve estar no formato 12345-123")
     private String cep;
+
+    @Length(min = 3, max = 100, message = "A cidade deve ter no mínimo 3 e no máximo 100 caracteres")
     private String cidade;
+
+    @Length(min = 2, max = 2, message = "UF deve ter 2 caracteres")
     private String uf;
 
     public void setId(Long id) {

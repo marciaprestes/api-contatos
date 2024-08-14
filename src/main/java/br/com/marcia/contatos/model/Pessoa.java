@@ -2,6 +2,8 @@ package br.com.marcia.contatos.model;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "tb_pessoa")
 public class Pessoa {
@@ -24,6 +26,10 @@ public class Pessoa {
 
     @Column
     private String uf;
+
+    @OneToMany
+    @JoinColumn(name = "pessoa_id")
+    private List<Contato> contatos;
 
     public void setId(Long id) {
         this.id = id;
@@ -73,4 +79,11 @@ public class Pessoa {
         this.uf = uf;
     }
 
+    public List<Contato> getContatos() {
+        return contatos;
+    }
+
+    public void setContatos(List<Contato> contatos) {
+        this.contatos = contatos;
+    }
 }

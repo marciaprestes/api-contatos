@@ -1,9 +1,10 @@
 package br.com.marcia.contatos.resource;
 
-import br.com.marcia.contatos.Serveve.PessoaService;
 import br.com.marcia.contatos.dto.MalaDiretaRecord;
 import br.com.marcia.contatos.dto.PessoaDto;
+import br.com.marcia.contatos.service.PessoaService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class PessoaResource {
 
     @Operation(summary = "Cria uma Pessoa")
     @PostMapping
-    public ResponseEntity<PessoaDto> save(@RequestBody PessoaDto pessoaDto){
+    public ResponseEntity<PessoaDto> save(@RequestBody @Valid PessoaDto pessoaDto){
         return ResponseEntity.ok(pessoaService.save(pessoaDto));
     }
 
@@ -32,7 +33,7 @@ public class PessoaResource {
 
     @Operation(summary = "Atualiza uma Pessoa")
     @PutMapping("/{id}")
-    public ResponseEntity<PessoaDto> update(@RequestBody PessoaDto pessoaDto,@PathVariable Long id){
+    public ResponseEntity<PessoaDto> update(@RequestBody @Valid PessoaDto pessoaDto,@PathVariable Long id){
         return ResponseEntity.ok(pessoaService.update(pessoaDto,id));
     }
 
